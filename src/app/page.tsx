@@ -44,22 +44,45 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen font-['Inter',_sans-serif]" style={{ backgroundColor: '#E6F0FA', fontFamily: "'Inter', 'Roboto', 'Lato', sans-serif" }}>
+    <div
+      className="h-screen font-['Inter',_sans-serif] flex flex-col"
+      style={{
+        fontFamily: "'Inter', 'Roboto', 'Lato', sans-serif",
+        position: 'relative',
+        overflow: 'hidden',
+        maxHeight: '100vh'
+      }}
+    >
+      {/* Wave background */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
+            linear-gradient(135deg, #E6F0FA 0%, #F0F7FF 100%),
+            url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 25 50 50 T100 50 V100 H0 Z' fill='%23DCE7F1' fill-opacity='0.3'/%3E%3C/svg%3E"),
+            url("data:image/svg+xml,%3Csvg width='200' height='100' viewBox='0 0 200 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 70 Q50 40 100 70 T200 70 V100 H0 Z' fill='%23BFDBFE' fill-opacity='0.2'/%3E%3C/svg%3E")
+          `,
+          backgroundSize: 'cover, 400px 200px, 800px 400px',
+          backgroundPosition: 'center, 0 20%, 0 60%',
+          backgroundRepeat: 'no-repeat, repeat-x, repeat-x',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
       {/* Navbar */}
-      <nav className="border-b border-blue-200 py-3">
+      <nav className="border-b border-blue-200 py-3" style={{ position: 'relative', zIndex: 1 }}>
         <div className="w-full relative flex items-center min-h-[60px]">
           {/* Logo - 5% from left */}
           <div className="absolute left-[5%] flex items-center">
             <h1 className="text-2xl font-bold text-blue-800">PengPluss</h1>
           </div>
 
-          {/* Centered Navigation Links - Always visible, scale on mobile */}
+          {/* Navigation space - empty for now, links will appear when logged in */}
           <div className="flex items-center justify-center w-full">
-            <div className="flex items-center gap-[15vw]">
-              <a href="#" style={{ color: '#333' }} className="hover:text-blue-800 font-medium transition-colors text-sm sm:text-base">Om oss</a>
-              <a href="#" style={{ color: '#333' }} className="hover:text-blue-800 font-medium transition-colors text-sm sm:text-base">Kontakt oss</a>
-              <a href="#" style={{ color: '#333' }} className="hover:text-blue-800 font-medium transition-colors text-sm sm:text-base">Tips oss</a>
-            </div>
           </div>
 
           {/* Login Button - 5% from right */}
@@ -75,143 +98,168 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Hero Visual */}
-          <div className="mb-12">
-            <div className="w-64 h-64 mx-auto mb-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#DCE7F1' }}>
-              <div className="text-6xl">📊</div>
+      {/* Main content wrapper */}
+      <div className="flex-1" style={{ position: 'relative', zIndex: 1 }}>
+        {/* Hero Section */}
+        <section className="px-6 py-12">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Hero Visual */}
+            <div className="mb-8">
+              <div className="w-48 h-48 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#DCE7F1' }}>
+                <div className="text-5xl">📊</div>
+              </div>
+            </div>
+
+            {/* Hero Content */}
+            <h1 className="text-4xl font-bold text-blue-800 mb-4 leading-tight">
+              Få full kontroll over økonomien din
+            </h1>
+            <div className="text-lg mb-6 max-w-2xl mx-auto" style={{ color: '#333' }}>
+              <p className="mb-2">Få oversikt over pensjon, lag ditt personlige budsjett, og få smarte økonomitips</p>
+              <p>Alt samlet på ett sted, med <strong>PengPluss</strong></p>
+            </div>
+
+            {/* CTA Button */}
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={handleLoginClick}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+              >
+                Registrer deg gratis
+              </button>
             </div>
           </div>
+        </section>
 
-          {/* Hero Content */}
-          <h1 className="text-5xl font-bold text-blue-800 mb-6 leading-tight">
-            Få full kontroll over økonomien din
-          </h1>
-          <div className="text-xl mb-8 max-w-2xl mx-auto" style={{ color: '#333' }}>
-            <p className="mb-3">Få oversikt over pensjon, lag ditt personlige budsjett, og få smarte økonomitips</p>
-            <p>Alt samlet på ett sted, med <strong>PengPluss</strong></p>
+        {/* Features Section */}
+        <section id="features" className="px-8 py-8">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-2xl font-bold text-blue-800 text-center mb-8">
+              Alt du trenger for å ta kontroll over økonomien
+            </h2>
+
+            <div className="flex flex-col justify-center items-center" style={{ gap: '15px' }}>
+              {/* Pensjon Box */}
+              <button
+                className="p-8 transition-colors duration-300 flex flex-col items-center justify-center text-center"
+                style={{
+                  background: 'linear-gradient(to right, #93C5FD, #BFDBFE)',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '50%',
+                  margin: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #BFDBFE, #DBEAFE)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #93C5FD, #BFDBFE)'
+                }}
+              >
+                <div className="text-4xl mb-4">🏦</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: '#1E3A8A' }}>Pensjon</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#1E3A8A' }}>
+                  Se hva du har spart, og planlegg for fremtiden.
+                </p>
+              </button>
+
+              {/* Budsjett Box */}
+              <button
+                className="p-8 transition-colors duration-300 flex flex-col items-center justify-center text-center"
+                style={{
+                  background: 'linear-gradient(to right, #6EE7B7, #A7F3D0)',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '50%',
+                  margin: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #A7F3D0, #D1FAE5)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #6EE7B7, #A7F3D0)'
+                }}
+              >
+                <div className="text-4xl mb-4">💰</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: '#065F46' }}>Budsjett</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#065F46' }}>
+                  Hold styr på inntekter, utgifter og sparemål – enkelt og visuelt.
+                </p>
+              </button>
+
+              {/* Tips Box */}
+              <button
+                className="p-8 transition-colors duration-300 flex flex-col items-center justify-center text-center"
+                style={{
+                  background: 'linear-gradient(to right, #FDE68A, #FEF9C3)',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '50%',
+                  margin: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FEF9C3, #FFFBEB)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FDE68A, #FEF9C3)'
+                }}
+              >
+                <div className="text-4xl mb-4">💡</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: '#78350F' }}>Tips</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#78350F' }}>
+                  Smarte råd for å spare mer og investere klokt.
+                </p>
+              </button>
+            </div>
           </div>
+        </section>
 
-          {/* CTA Button */}
-          <div className="flex justify-center mb-8">
+        {/* Footer CTA */}
+        <section className="px-6 py-8 border-t border-blue-200">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-xl font-bold text-blue-800 mb-4">
+              Klar til å ta kontroll over økonomien?
+            </h2>
             <button
               onClick={handleLoginClick}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 hover:scale-105 shadow-lg"
             >
-              Registrer deg gratis
+              Start i dag – helt gratis!
             </button>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* Features Section */}
-      <section id="features" className="px-8 py-20">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-blue-800 text-center mb-20">
-            Alt du trenger for å ta kontroll over økonomien
-          </h2>
-
-          <div className="flex flex-col justify-center items-center" style={{ gap: '30px' }}>
-            {/* Pensjon Box */}
-            <button
-              className="p-12 transition-colors duration-300 flex flex-col items-center justify-center text-center"
-              style={{
-                background: 'linear-gradient(to right, #93C5FD, #BFDBFE)',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                border: 'none',
-                borderRadius: '20px',
-                width: '50%',
-                margin: '20px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(to right, #BFDBFE, #DBEAFE)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(to right, #93C5FD, #BFDBFE)'
-              }}
-            >
-              <div className="text-6xl mb-6">🏦</div>
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#1E3A8A' }}>Pensjon</h3>
-              <p className="text-base leading-relaxed" style={{ color: '#1E3A8A' }}>
-                Se hva du har spart, og planlegg for fremtiden.
-              </p>
-            </button>
-
-            {/* Budsjett Box */}
-            <button
-              className="p-12 transition-colors duration-300 flex flex-col items-center justify-center text-center"
-              style={{
-                background: 'linear-gradient(to right, #6EE7B7, #A7F3D0)',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                border: 'none',
-                borderRadius: '20px',
-                width: '50%',
-                margin: '20px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(to right, #A7F3D0, #D1FAE5)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(to right, #6EE7B7, #A7F3D0)'
-              }}
-            >
-              <div className="text-6xl mb-6">💰</div>
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#065F46' }}>Budsjett</h3>
-              <p className="text-base leading-relaxed" style={{ color: '#065F46' }}>
-                Hold styr på inntekter, utgifter og sparemål – enkelt og visuelt.
-              </p>
-            </button>
-
-            {/* Tips Box */}
-            <button
-              className="p-12 transition-colors duration-300 flex flex-col items-center justify-center text-center"
-              style={{
-                background: 'linear-gradient(to right, #FDE68A, #FEF9C3)',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                border: 'none',
-                borderRadius: '20px',
-                width: '50%',
-                margin: '20px'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(to right, #FEF9C3, #FFFBEB)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(to right, #FDE68A, #FEF9C3)'
-              }}
-            >
-              <div className="text-6xl mb-6">💡</div>
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#78350F' }}>Tips</h3>
-              <p className="text-base leading-relaxed" style={{ color: '#78350F' }}>
-                Smarte råd for å spare mer og investere klokt.
-              </p>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer CTA */}
-      <section className="px-6 py-16 border-t border-blue-200">
+      {/* Sticky Footer */}
+      <footer className="border-t border-blue-200 pt-4 pb-8" style={{ position: 'relative', zIndex: 1, backgroundColor: 'rgba(230, 240, 250, 0.8)', backdropFilter: 'blur(10px)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">
-            Klar til å ta kontroll over økonomien?
-          </h2>
-          <button
-            onClick={handleLoginClick}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
-          >
-            Start i dag – helt gratis!
-          </button>
+          <div className="flex justify-center items-center" style={{ gap: '48px' }}>
+            <a href="#" className="text-xs font-light transition-colors hover:underline" style={{ color: '#6B8BB3', padding: '8px 12px' }}>
+              Om oss
+            </a>
+            <a href="#" className="text-xs font-light transition-colors hover:underline" style={{ color: '#6B8BB3', padding: '8px 12px' }}>
+              Kontakt oss
+            </a>
+            <a href="#" className="text-xs font-light transition-colors hover:underline" style={{ color: '#6B8BB3', padding: '8px 12px' }}>
+              Tips oss
+            </a>
+          </div>
         </div>
-      </section>
+      </footer>
 
       {/* Login Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-50"
           style={{
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            zIndex: '50',
             backgroundColor: 'rgba(230, 240, 250, 0.8)',
             display: 'flex',
             alignItems: 'center',

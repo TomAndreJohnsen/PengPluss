@@ -32,83 +32,176 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <header className="bg-white/70 backdrop-blur-sm shadow-lg border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-          <div className="flex justify-between items-center py-8">
-            <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                PengPluss
-              </h1>
-              <p className="text-gray-700 font-medium mt-1">Din totale oversikt over din økonomi</p>
-            </div>
+    <div
+      className="h-screen font-['Inter',_sans-serif] flex flex-col"
+      style={{
+        fontFamily: "'Inter', 'Roboto', 'Lato', sans-serif",
+        position: 'relative',
+        overflow: 'hidden',
+        maxHeight: '100vh'
+      }}
+    >
+      {/* Wave background */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
+            linear-gradient(135deg, #E6F0FA 0%, #F0F7FF 100%),
+            url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q25 25 50 50 T100 50 V100 H0 Z' fill='%23DCE7F1' fill-opacity='0.3'/%3E%3C/svg%3E"),
+            url("data:image/svg+xml,%3Csvg width='200' height='100' viewBox='0 0 200 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 70 Q50 40 100 70 T200 70 V100 H0 Z' fill='%23BFDBFE' fill-opacity='0.2'/%3E%3C/svg%3E")
+          `,
+          backgroundSize: 'cover, 400px 200px, 800px 400px',
+          backgroundPosition: 'center, 0 20%, 0 60%',
+          backgroundRepeat: 'no-repeat, repeat-x, repeat-x',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+
+      {/* Navbar */}
+      <nav className="border-b border-blue-200 py-3" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="w-full relative flex items-center min-h-[60px]">
+          {/* Logo - 5% from left */}
+          <div className="absolute left-[5%] flex items-center">
+            <h1 className="text-2xl font-bold text-blue-800">PengPluss</h1>
+          </div>
+
+          {/* Navigation space - empty for now, links will appear when needed */}
+          <div className="flex items-center justify-center w-full">
+          </div>
+
+          {/* Logout Button - 5% from right */}
+          <div className="absolute right-[5%] flex items-center">
             <button
               onClick={handleLogout}
-              className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-2 rounded-xl hover:bg-white/50 transition-all duration-200"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-sm sm:text-base"
             >
-              Logg ut
+              <span className="hidden sm:inline">Logg ut</span>
+              <span className="sm:hidden">Logg ut</span>
             </button>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <main className="max-w-7xl mx-auto py-16 px-6 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <div
-            onClick={() => handleCardClick('pensjon')}
-            className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-10 cursor-pointer hover:shadow-3xl hover:scale-[1.02] transition-all duration-300 border border-white/30 group"
-          >
-            <div className="flex items-center mb-6">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-4 mr-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h2 className="text-3xl font-bold text-gray-800">Pensjon</h2>
-            </div>
-            <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-              Oversikt over pensjonsopptjening og fremtidige utbetalinger
-            </p>
-            <div className="bg-blue-50/50 rounded-2xl p-6 space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600">Estimert månedlig pensjon</span>
-                <span className="text-xl font-bold text-blue-700">kr 18 500</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600">Pensjonsalder</span>
-                <span className="text-xl font-bold text-blue-700">67 år</span>
-              </div>
+      {/* Main content wrapper */}
+      <div className="flex-1" style={{ position: 'relative', zIndex: 1 }}>
+        {/* Dashboard Content */}
+        <section className="px-6 py-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl font-bold text-blue-800 mb-4 leading-tight">
+              Dashboard
+            </h1>
+            <div className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: '#333' }}>
+              <p>Velkommen til din personlige økonomiportal</p>
             </div>
           </div>
+        </section>
 
-          <div
-            onClick={() => handleCardClick('budsjett')}
-            className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-10 cursor-pointer hover:shadow-3xl hover:scale-[1.02] transition-all duration-300 border border-white/30 group"
-          >
-            <div className="flex items-center mb-6">
-              <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 mr-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
-              </div>
-              <h2 className="text-3xl font-bold text-gray-800">Budsjett</h2>
+        {/* Feature Cards */}
+        <section className="px-8 py-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col justify-center items-center" style={{ gap: '15px' }}>
+              {/* Pensjon Box */}
+              <button
+                onClick={() => handleCardClick('pensjon')}
+                className="p-8 transition-colors duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
+                style={{
+                  background: 'linear-gradient(to right, #93C5FD, #BFDBFE)',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '50%',
+                  margin: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #BFDBFE, #DBEAFE)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #93C5FD, #BFDBFE)'
+                }}
+              >
+                <div className="text-4xl mb-4">🏦</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: '#1E3A8A' }}>Pensjon</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#1E3A8A' }}>
+                  Se hva du har spart, og planlegg for fremtiden.
+                </p>
+              </button>
+
+              {/* Budsjett Box */}
+              <button
+                onClick={() => handleCardClick('budsjett')}
+                className="p-8 transition-colors duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
+                style={{
+                  background: 'linear-gradient(to right, #6EE7B7, #A7F3D0)',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '50%',
+                  margin: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #A7F3D0, #D1FAE5)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #6EE7B7, #A7F3D0)'
+                }}
+              >
+                <div className="text-4xl mb-4">💰</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: '#065F46' }}>Budsjett</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#065F46' }}>
+                  Hold styr på inntekter, utgifter og sparemål – enkelt og visuelt.
+                </p>
+              </button>
+
+              {/* Tips Box */}
+              <button
+                className="p-8 transition-colors duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
+                style={{
+                  background: 'linear-gradient(to right, #FDE68A, #FEF9C3)',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                  border: 'none',
+                  borderRadius: '20px',
+                  width: '50%',
+                  margin: '10px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FEF9C3, #FFFBEB)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FDE68A, #FEF9C3)'
+                }}
+              >
+                <div className="text-4xl mb-4">💡</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: '#78350F' }}>Tips</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#78350F' }}>
+                  Smarte råd for å spare mer og investere klokt.
+                </p>
+              </button>
             </div>
-            <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-              Administrer ditt månedlige budsjett og sporing av utgifter
-            </p>
-            <div className="bg-green-50/50 rounded-2xl p-6 space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600">Månedlig inntekt</span>
-                <span className="text-xl font-bold text-green-700">kr 45 000</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600">Tilgjengelig</span>
-                <span className="text-xl font-bold text-green-700">kr 12 500</span>
-              </div>
-            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Sticky Footer */}
+      <footer className="border-t border-blue-200 pt-4 pb-8" style={{ position: 'relative', zIndex: 1, backgroundColor: 'rgba(230, 240, 250, 0.8)', backdropFilter: 'blur(10px)' }}>
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex justify-center items-center" style={{ gap: '48px' }}>
+            <a href="#" className="text-xs font-light transition-colors hover:underline" style={{ color: '#6B8BB3', padding: '8px 12px' }}>
+              Om oss
+            </a>
+            <a href="#" className="text-xs font-light transition-colors hover:underline" style={{ color: '#6B8BB3', padding: '8px 12px' }}>
+              Kontakt oss
+            </a>
+            <a href="#" className="text-xs font-light transition-colors hover:underline" style={{ color: '#6B8BB3', padding: '8px 12px' }}>
+              Tips oss
+            </a>
           </div>
         </div>
-      </main>
+      </footer>
     </div>
   )
 }
