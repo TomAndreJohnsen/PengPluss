@@ -210,8 +210,13 @@ export default function HomePage() {
       {/* Login Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-50"
           style={{
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            zIndex: '50',
             backgroundColor: 'rgba(230, 240, 250, 0.8)',
             display: 'flex',
             alignItems: 'center',
