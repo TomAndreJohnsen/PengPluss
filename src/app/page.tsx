@@ -1,12 +1,41 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function HomePage() {
   const router = useRouter()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
+  const [error, setError] = useState('')
 
   const handleLoginClick = () => {
-    router.push('/login')
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setEmail('')
+    setPassword('')
+    setError('')
+    setRememberMe(false)
+  }
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+
+    if (email === 'test@test.com' && password === '1234') {
+      localStorage.setItem('isAuthenticated', 'true')
+      if (rememberMe) {
+        localStorage.setItem('rememberMe', 'true')
+      }
+      router.push('/dashboard')
+    } else {
+      setError('Ugyldig e-post eller passord')
+    }
   }
 
   const scrollToFeatures = () => {
@@ -177,6 +206,173 @@ export default function HomePage() {
           </button>
         </div>
       </section>
+
+      {/* Login Modal */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50"
+          style={{
+            backgroundColor: 'rgba(230, 240, 250, 0.8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
+          onClick={closeModal}
+        >
+          <div
+            style={{
+              backgroundColor: '#DCE7F1',
+              borderRadius: '20px',
+              fontFamily: "'Inter', 'Roboto', 'Lato', sans-serif",
+              width: 'auto',
+              maxWidth: '400px',
+              minWidth: '320px',
+              padding: '30px',
+              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+              position: 'relative'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              style={{
+                position: 'absolute',
+                top: '15px',
+                right: '20px',
+                background: 'none',
+                border: 'none',
+                fontSize: '24px',
+                color: '#666',
+                cursor: 'pointer',
+                lineHeight: '1'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#333'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
+            >
+              ×
+            </button>
+
+            {/* Modal Header */}
+            <div style={{ textAlign: 'center', marginBottom: '25px', marginTop: '10px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1E3A8A', margin: '0 0 8px 0' }}>
+                Logg inn
+              </h2>
+              <p style={{ fontSize: '14px', color: '#333', margin: '0' }}>
+                Velkommen tilbake til PengPluss
+              </p>
+            </div>
+
+            {/* Login Form */}
+            <form onSubmit={handleLogin}>
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>
+                  Brukernavn
+                </label>
+                <input
+                  id="modal-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="test@test.com"
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    borderRadius: '25px',
+                    backgroundColor: 'white',
+                    border: '1px solid #d1d5db',
+                    fontSize: '14px',
+                    outline: 'none',
+                    boxSizing: 'border-box'
+                  }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+                  onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                />
+              </div>
+
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>
+                  Passord
+                </label>
+                <input
+                  id="modal-password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="1234"
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    borderRadius: '25px',
+                    backgroundColor: 'white',
+                    border: '1px solid #d1d5db',
+                    fontSize: '14px',
+                    outline: 'none',
+                    boxSizing: 'border-box'
+                  }}
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+                  onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                />
+              </div>
+
+              {/* Remember Me Checkbox */}
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    style={{ marginRight: '8px', width: '16px', height: '16px' }}
+                  />
+                  <span style={{ fontSize: '14px', color: '#333' }}>Husk meg</span>
+                </label>
+              </div>
+
+              {error && (
+                <div style={{
+                  color: '#dc2626',
+                  fontSize: '14px',
+                  textAlign: 'center',
+                  backgroundColor: '#fef2f2',
+                  padding: '12px',
+                  borderRadius: '8px',
+                  border: '1px solid #fecaca',
+                  marginBottom: '20px'
+                }}>
+                  {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                style={{
+                  width: '100%',
+                  padding: '12px 24px',
+                  backgroundColor: '#2563eb',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#2563eb'}
+              >
+                Logg inn
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
