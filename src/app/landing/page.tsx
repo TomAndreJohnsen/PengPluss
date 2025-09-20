@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation'
 
-export default function HomePage() {
+export default function LandingPage() {
   const router = useRouter()
 
   const handleLoginClick = () => {
-    router.push('/login')
+    router.push('/')
   }
 
   const scrollToFeatures = () => {
@@ -17,42 +17,22 @@ export default function HomePage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#E6F0FA' }}>
       {/* Navbar */}
-      <nav className="py-4 border-b border-blue-200">
-        <div className="w-full relative">
-          <div className="flex items-center justify-center min-h-[40px] relative">
-            {/* Logo - 5% from left */}
-            <div className="absolute left-[5%] flex items-center">
-              <h1 className="text-2xl font-bold text-blue-800">PengPluss</h1>
-            </div>
+      <nav className="px-6 py-4 border-b border-blue-200">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          {/* Logo */}
+          <h1 className="text-2xl font-bold text-blue-800">PengPluss</h1>
 
-            {/* Centered Navigation Links - Hidden on mobile */}
-            <div className="hidden md:flex items-center justify-center">
-              <div className="flex items-center" style={{ gap: '15vw' }}>
-                <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors">Om oss</a>
-                <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors">Kontakt oss</a>
-                <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors">Tips oss</a>
-              </div>
-            </div>
-
-            {/* Login Button - 5% from right */}
-            <div className="absolute right-[5%] flex items-center">
-              <button
-                onClick={handleLoginClick}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
-              >
-                <span className="hidden sm:inline">Logg inn / Opprett konto</span>
-                <span className="sm:hidden">Logg inn</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu - Hidden by default */}
-          <div className="md:hidden mt-4 pb-4 border-t border-blue-200 hidden">
-            <div className="flex flex-col space-y-3 items-center">
-              <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors py-2">Om oss</a>
-              <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors py-2">Kontakt oss</a>
-              <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors py-2">Tips oss</a>
-            </div>
+          {/* Navigation Links */}
+          <div className="flex items-center space-x-6">
+            <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors">Om oss</a>
+            <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors">Tips</a>
+            <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors">Kontakt</a>
+            <button
+              onClick={handleLoginClick}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
+            >
+              Logg inn / Opprett konto
+            </button>
           </div>
         </div>
       </nav>
