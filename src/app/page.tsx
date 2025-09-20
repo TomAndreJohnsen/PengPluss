@@ -65,16 +65,16 @@ export default function HomePage() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-4">
             <button
               onClick={handleLoginClick}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+              className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
             >
               Kom i gang
             </button>
             <button
               onClick={scrollToFeatures}
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
+              className="bg-orange-100 hover:bg-orange-200 text-orange-700 hover:text-orange-800 px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 border border-orange-200 hover:border-orange-300 shadow-sm hover:shadow-md"
             >
               Les mer
             </button>
