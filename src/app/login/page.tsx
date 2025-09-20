@@ -26,20 +26,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center" style={{ backgroundColor: '#E6F0FA', paddingTop: '10vh' }}>
+    <div className="min-h-screen flex justify-center font-['Inter',_sans-serif]" style={{ backgroundColor: '#E6F0FA', paddingTop: '10vh', fontFamily: "'Inter', 'Roboto', 'Lato', sans-serif" }}>
       <div className="text-center">
         {/* Header */}
         <div className="mb-16">
           <button
             onClick={handleBackToLanding}
-            className="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center transition-colors"
+            className="hover:text-blue-800 mb-4 inline-flex items-center transition-colors"
+            style={{ color: '#333' }}
           >
             ← Tilbake til forsiden
           </button>
           <h1 className="text-6xl font-bold text-blue-800 mb-8 tracking-wide">
             Peng Pluss
           </h1>
-          <p className="text-xl text-blue-700 font-medium">
+          <p className="text-xl font-medium" style={{ color: '#333' }}>
             Logg inn på din konto
           </p>
         </div>
@@ -48,7 +49,7 @@ export default function LoginPage() {
         <div className="shadow-lg max-w-sm mx-auto border border-gray-300" style={{ backgroundColor: '#DCE7F1', borderRadius: '12px', padding: '30px' }}>
           <form onSubmit={handleLogin}>
             <div className="mb-8">
-              <label htmlFor="email" className="block text-base font-semibold text-gray-700 mb-3 text-center">
+              <label htmlFor="email" className="block text-base font-semibold mb-3 text-center" style={{ color: '#333' }}>
                 Brukernavn
               </label>
               <input
@@ -65,7 +66,7 @@ export default function LoginPage() {
             </div>
 
             <div className="mb-10">
-              <label htmlFor="password" className="block text-base font-semibold text-gray-700 mb-3 text-center">
+              <label htmlFor="password" className="block text-base font-semibold mb-3 text-center" style={{ color: '#333' }}>
                 Passord
               </label>
               <input

@@ -15,7 +15,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#E6F0FA' }}>
+    <div className="min-h-screen font-['Inter',_sans-serif]" style={{ backgroundColor: '#E6F0FA', fontFamily: "'Inter', 'Roboto', 'Lato', sans-serif" }}>
       {/* Navbar */}
       <nav className="border-b border-blue-200 py-3">
         <div className="w-full relative flex items-center min-h-[60px]">
@@ -27,9 +27,9 @@ export default function HomePage() {
           {/* Centered Navigation Links - Always visible, scale on mobile */}
           <div className="flex items-center justify-center w-full">
             <div className="flex items-center gap-[15vw]">
-              <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors text-sm sm:text-base">Om oss</a>
-              <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors text-sm sm:text-base">Kontakt oss</a>
-              <a href="#" className="text-blue-700 hover:text-blue-900 font-medium transition-colors text-sm sm:text-base">Tips oss</a>
+              <a href="#" style={{ color: '#333' }} className="hover:text-blue-800 font-medium transition-colors text-sm sm:text-base">Om oss</a>
+              <a href="#" style={{ color: '#333' }} className="hover:text-blue-800 font-medium transition-colors text-sm sm:text-base">Kontakt oss</a>
+              <a href="#" style={{ color: '#333' }} className="hover:text-blue-800 font-medium transition-colors text-sm sm:text-base">Tips oss</a>
             </div>
           </div>
 
@@ -58,73 +58,107 @@ export default function HomePage() {
 
           {/* Hero Content */}
           <h1 className="text-5xl font-bold text-blue-800 mb-6 leading-tight">
-            Din totale oversikt over din økonomi
+            Få full kontroll over økonomien din
           </h1>
-          <p className="text-xl text-blue-700 mb-8 max-w-2xl mx-auto">
-            Ta kontroll over dine finanser med PengPluss. Pensjon, budsjett og smarte tips - alt på ett sted.
-          </p>
+          <div className="text-xl mb-8 max-w-2xl mx-auto" style={{ color: '#333' }}>
+            <p className="mb-3">Få oversikt over pensjon, lag ditt personlige budsjett, og få smarte økonomitips</p>
+            <p>Alt samlet på ett sted, med <strong>PengPluss</strong></p>
+          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-4">
+          {/* CTA Button */}
+          <div className="flex justify-center mb-8">
             <button
               onClick={handleLoginClick}
-              className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+              className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
             >
-              Kom i gang
-            </button>
-            <button
-              onClick={scrollToFeatures}
-              className="bg-orange-100 hover:bg-orange-200 text-orange-700 hover:text-orange-800 px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 border border-orange-200 hover:border-orange-300 shadow-sm hover:shadow-md"
-            >
-              Les mer
+              Registrer deg gratis
             </button>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="px-6 py-20">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-blue-800 text-center mb-16">
+      <section id="features" className="px-8 py-20">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-blue-800 text-center mb-20">
             Alt du trenger for å ta kontroll over økonomien
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Pensjon Card */}
-            <div className="rounded-xl p-8 shadow-lg border border-blue-200" style={{ backgroundColor: '#DCE7F1' }}>
-              <div className="text-4xl mb-4">🏦</div>
-              <h3 className="text-xl font-bold text-blue-800 mb-4">Pensjon</h3>
-              <p className="text-blue-700 mb-6">
-                Få oversikt over din pensjon og plan for fremtiden. Se hvor mye du har spart og hvor mye du trenger.
+          <div className="flex flex-col justify-center items-center" style={{ gap: '30px' }}>
+            {/* Pensjon Box */}
+            <button
+              className="p-12 transition-colors duration-300 flex flex-col items-center justify-center text-center"
+              style={{
+                background: 'linear-gradient(to right, #93C5FD, #BFDBFE)',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                border: 'none',
+                borderRadius: '20px',
+                width: '50%',
+                margin: '20px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(to right, #BFDBFE, #DBEAFE)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(to right, #93C5FD, #BFDBFE)'
+              }}
+            >
+              <div className="text-6xl mb-6">🏦</div>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#1E3A8A' }}>Pensjon</h3>
+              <p className="text-base leading-relaxed" style={{ color: '#1E3A8A' }}>
+                Se hva du har spart, og planlegg for fremtiden.
               </p>
-              <button className="text-blue-600 hover:text-blue-800 font-semibold transition-colors">
-                Les mer →
-              </button>
-            </div>
+            </button>
 
-            {/* Budsjett Card */}
-            <div className="rounded-xl p-8 shadow-lg border border-blue-200" style={{ backgroundColor: '#DCE7F1' }}>
-              <div className="text-4xl mb-4">💰</div>
-              <h3 className="text-xl font-bold text-blue-800 mb-4">Budsjett</h3>
-              <p className="text-blue-700 mb-6">
-                Lag og følg opp ditt personlige budsjett. Hold styr på inntekter, utgifter og sparemål.
+            {/* Budsjett Box */}
+            <button
+              className="p-12 transition-colors duration-300 flex flex-col items-center justify-center text-center"
+              style={{
+                background: 'linear-gradient(to right, #6EE7B7, #A7F3D0)',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                border: 'none',
+                borderRadius: '20px',
+                width: '50%',
+                margin: '20px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(to right, #A7F3D0, #D1FAE5)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(to right, #6EE7B7, #A7F3D0)'
+              }}
+            >
+              <div className="text-6xl mb-6">💰</div>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#065F46' }}>Budsjett</h3>
+              <p className="text-base leading-relaxed" style={{ color: '#065F46' }}>
+                Hold styr på inntekter, utgifter og sparemål – enkelt og visuelt.
               </p>
-              <button className="text-blue-600 hover:text-blue-800 font-semibold transition-colors">
-                Les mer →
-              </button>
-            </div>
+            </button>
 
-            {/* Tips Card */}
-            <div className="rounded-xl p-8 shadow-lg border border-blue-200" style={{ backgroundColor: '#DCE7F1' }}>
-              <div className="text-4xl mb-4">💡</div>
-              <h3 className="text-xl font-bold text-blue-800 mb-4">Tips</h3>
-              <p className="text-blue-700 mb-6">
-                Få eksperttips og råd for å forbedre din økonomi. Lær hvordan du kan spare mer og investere smartere.
+            {/* Tips Box */}
+            <button
+              className="p-12 transition-colors duration-300 flex flex-col items-center justify-center text-center"
+              style={{
+                background: 'linear-gradient(to right, #FDE68A, #FEF9C3)',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                border: 'none',
+                borderRadius: '20px',
+                width: '50%',
+                margin: '20px'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(to right, #FEF9C3, #FFFBEB)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(to right, #FDE68A, #FEF9C3)'
+              }}
+            >
+              <div className="text-6xl mb-6">💡</div>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#78350F' }}>Tips</h3>
+              <p className="text-base leading-relaxed" style={{ color: '#78350F' }}>
+                Smarte råd for å spare mer og investere klokt.
               </p>
-              <button className="text-blue-600 hover:text-blue-800 font-semibold transition-colors">
-                Les mer →
-              </button>
-            </div>
+            </button>
           </div>
         </div>
       </section>
@@ -135,14 +169,11 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold text-blue-800 mb-6">
             Klar til å ta kontroll over økonomien?
           </h2>
-          <p className="text-xl text-blue-700 mb-8">
-            Bli med tusenvis av nordmenn som allerede bruker PengPluss.
-          </p>
           <button
             onClick={handleLoginClick}
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
           >
-            Start i dag - helt gratis
+            Start i dag – helt gratis!
           </button>
         </div>
       </section>
